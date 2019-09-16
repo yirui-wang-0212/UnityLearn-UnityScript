@@ -341,5 +341,12 @@ public class ComponentDemo : MonoBehaviour{
 
 用于存储并操控物体的位置、旋转和缩放。每一个 Transform 可以有一个父级，允许你分层次应用位置、旋转和缩放。
 
+1. Position
+
+   - Position：世界坐标系
+   - LocalPosition：相对于父级变换的位置
+
+   Inspector 中 Transform 的 Position 实际上是 LocalPosition
+
 
 
