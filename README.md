@@ -268,9 +268,16 @@ public class Lifecycle : MonoBehaviour{
 
 Component 类提供了查找（在当前 GameObject、后代、先辈）组件的功能。
 
+Variables 变量：
+
+- gameObject：组件附加的 GameObject
+- transform：组件附加的 GameObject 的 transform
+- tag
+
+Functions 函数：
+
 - 判断标签与传入字符串是否相等：```other.CompareTag("Player")```
 
-- transform
 - GetComponent / GetComponents
 - GetComponentsInChildren
 - GetComponentsInParent
@@ -339,35 +346,26 @@ public class ComponentDemo : MonoBehaviour{
 
 继承自 Component。
 
-Tranform 类提供了查找（夫、根、子（索引、名称））、变换组件、改变位置、角度、大小功能。
+Tranform 类提供了查找（父、根、子（索引、名称））、变换组件、改变位置、角度、大小功能。
+
+Variables 变量：
 
 - foreach -- transform
-
-- root
-
-- parent
 
 - SetParent
 
 - Find
 
-- GetChild
+- GetChild：根据索引查找
 
   *使用 Find 和 GetChild 可以实现在层级未知情况下查找子物体：递归*
 
-- Position / LocalPosition
-
-  - Position：世界坐标系
-  - LocalPosition：相对于父级变换的位置
-
-  *Inspector 中 Transform 的 Position 实际上是 LocalPosition（可以将 Inspector 的 Normal 模式改成 Debug 模式进行查看）*
-
-- localScale / lossyScale
-
-- Translate
-- RotateAround
 - DetachChild：所有子对象解除父子关系
 - SetParent(None)：于父物体解除父子关系
+- GetSiblingIndex：获取该对象的同级索引
+- SetSiblingIndex：设置该对象的同级索引
+- SetAsFirstSibling：设置该对象的同级索引为0
+- SetAsLastSibling：设置该对象的同级索引为最末
 
 ```c#
 // TransformDemo.cs
@@ -479,7 +477,9 @@ public class TransformDemo : MonoBehaviour{
 
 #### GameObject
 
-Hierachy 面板里所有东西都是 GameObject
+Hierachy 面板里所有东西都是 GameObject。
+
+用于禁用、启用、创建、查找 GameObject，以及创建 Component。
 
 Variables 变量：
 
@@ -492,8 +492,12 @@ Variables 变量：
 Functions 函数：
 
 - SetActive：设置物体启用/禁用
-- AddComponent
+- AddComponent：不可以直接 new 一个 Component
 - GameObject.Find("游戏对象名称")    慎用
+
+Static Functions 静态函数：
+
+- Find：慎用！
 - FindGameObjectsWithTag
 - FindGameObjectWithTag
 - FindWithTag
@@ -508,12 +512,17 @@ Functions 函数：
 
 #### Object
 
+Variables 变量：
+
+- name：对象的名字
+
 Static Functions 静态函数：
 
-- Destroy：删除一个游戏对象、组件或资源（参数是 Object，可以删除任何东西）
-- DontDestroyOnLoad：加载新场景的时候使目标对象不被清除
-- FindObjectOfType
-- FindObjectsOfType
+- Destroy：删除一个游戏对象、组件或资源（参数是 Object，可以删除任何东西），可以设置时间（几秒后删除），比如敌人死后几秒销毁
+- DontDestroyOnLoad：加载新场景的时候使目标对象不被销毁，一般重新 Load 场景会把所有对象销毁再重新创建一遍。
+- FindObjectOfType：根据类型找对象
+- FindObjectsOfType：根据类型找对象
+- Instantiate：克隆原始物体并返回克隆物体（传入 GameObject、Transform等）
 
 ```c#
 // GameObjectDemo.cs
@@ -564,10 +573,6 @@ public class GameObjectDemo : MonoBehaviour
     // 提示：查找 Enemy 脚本
 }
 ```
-
-
-
-
 
 
 
