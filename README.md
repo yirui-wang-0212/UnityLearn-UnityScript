@@ -288,9 +288,9 @@ public class ComponentDemo : MonoBehaviour{
 
         if (GUILayout.Button("transform")){
 
-            // 挂载在 GameObject 上的 Script 可以直接访 问GameObject 的 Tranform，
+            // 挂载在 GameObject 上的 Script 可以直接访 问GameObject 的 Transform，
             // 原因是 Script 中的类继承自 MonoBehaviour，MonoBehaviour 继承自 Behaviour，Behaviour 继承自 Component，
-            // Component 中有对当前 GameObject 的 Tranform 的引用这个属性，可以直接使用。
+            // Component 中有对当前 GameObject 的 Transform 的引用这个属性，可以直接使用。
             this.transform.position = new Vector3(1, 1, 1);
         }
 
@@ -339,7 +339,7 @@ public class ComponentDemo : MonoBehaviour{
 
 继承自 Component。
 
-Tranform 类提供了查找（夫、根、子（索引、名称））变换组件、改变位置、角度、大小功能。
+Tranform 类提供了查找（夫、根、子（索引、名称））、变换组件、改变位置、角度、大小功能。
 
 - foreach -- transform
 
@@ -370,12 +370,13 @@ Tranform 类提供了查找（夫、根、子（索引、名称））变换组�
 - SetParent(None)：于父物体解除父子关系
 
 ```c#
+// TransformDemo.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 // Tranform 类提供了查找（夫、根、子（索引、名称））变换组件、改变位置、角度、大小功能
-public class TranformDemo : MonoBehaviour{
+public class TransformDemo : MonoBehaviour{
     public Transform tf;
 
     // ---------------------------------------查找变换组件------------------------------------
@@ -473,6 +474,98 @@ public class TranformDemo : MonoBehaviour{
     }
 }
 ```
+
+
+
+#### GameObject
+
+Hierachy 面板里所有东西都是 GameObject
+
+Variables 变量：
+
+- activeInHierachy：场景中的游戏对象是否激活？即实际的激活状态：试想这种场景：爸爸的勾取消了，自己的勾还在，但是在场景中被禁用了
+
+- activeSelf：局部激活状态（只读），即自身激活状态。就是物体在 Inspector 里面的勾是不是还在
+- transform
+- name
+
+Functions 函数：
+
+- SetActive：设置物体启用/禁用
+- AddComponent
+- GameObject.Find("游戏对象名称")    慎用
+- FindGameObjectsWithTag
+- FindGameObjectWithTag
+- FindWithTag
+
+可以根据其中一个 Component 找其他 Component（详见 Component 模块），
+
+也可以根据 GameObejct 找 Component
+
+- GetComponent / GetComponents
+- GetComponentsInChildren
+- GetComponentsInParent
+
+#### Object
+
+Static Functions 静态函数：
+
+- Destroy：删除一个游戏对象、组件或资源（参数是 Object，可以删除任何东西）
+- DontDestroyOnLoad：加载新场景的时候使目标对象不被清除
+- FindObjectOfType
+- FindObjectsOfType
+
+```c#
+// GameObjectDemo.cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class GameObjectDemo : MonoBehaviour
+{
+    private void OnGUI(){
+
+        // 场景中的游戏对象是否激活？即实际的激活状态。试想这种场景：爸爸的勾取消了，自己的勾还在，但是在场景中被禁用了
+        // this.gameObject.activeInHierarchy
+        // 局部激活状态（只读），即自身激活状态。就是物体 Inspector 里面的勾是不是还在
+        // this.gameObject.activeSelf
+
+        // 设置物体启用还是禁用
+        // this.gameObject.SetActive();
+
+        if (GUILayout.Button("添加光源")){
+
+            // 不可以直接 new 一个 Component：light = new Light();
+            // 1. 创建物体
+            GameObject lightGO = new GameObject();
+            // 2. 在物体上添加组件
+            Light light = lightGO.AddComponent<Light>();
+            // 3. 修改组件的属性
+            light.color = Color.red;
+            light.type = LightType.Point;
+        }
+
+        // 在场景中根据名称查找物体（慎用），而this.transform.Find("游戏对象名称") 只查找子物体，可以使用
+        // GameObject.Find("游戏对象名称")
+
+        // 获取所有使用该标签的物体
+        GameObject[] allEnemy = GameObject.FindGameObjectsWithTag("Enemy");
+        // 获取使用该标签的物体（单个）
+        GameObject playerGO1 = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerGO2 = GameObject.FindWithTag("Player");
+        
+        // ----------------------------------------Object-----------------------------------
+        // 根据类型查找对象（component）
+        MeshRenderer mr = Object.FindObjectOfType<MeshRenderer>();
+        MeshRenderer[] mrs = Object.FindObjectsOfType<MeshRenderer>();
+        // Object.Destroy()
+    }
+    // 练习：查找血量最低的敌人
+    // 提示：查找 Enemy 脚本
+}
+```
+
+
 
 
 
