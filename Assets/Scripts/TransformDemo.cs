@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Tranform 类提供了查找（夫、根、子（索引、名称））变换组件、改变位置、角度、大小功能
-public class TranformDemo : MonoBehaviour{
+public class TransformDemo : MonoBehaviour{
     public Transform tf;
 
     // ---------------------------------------查找变换组件-----------------------------------------
