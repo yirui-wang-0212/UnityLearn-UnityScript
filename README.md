@@ -358,7 +358,7 @@ Variables 变量：
 
 - GetChild：根据索引查找
 
-  *使用 Find 和 GetChild 可以实现在层级未知情况下查找子物体：递归*
+  *练习：使用 Find 和 GetChild 可以实现在层级未知情况下查找子物体：递归*
 
 - DetachChild：所有子对象解除父子关系
 - SetParent(None)：于父物体解除父子关系
@@ -579,6 +579,7 @@ public class GameObjectDemo : MonoBehaviour
 ### 练习：查找血量最低的敌人
 
 ```c#
+// Enemy.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -590,6 +591,7 @@ public class Enemy : MonoBehaviour
 ```
 
 ```c#
+// FindEnemy.cs
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -625,5 +627,55 @@ public class FindEnemy : MonoBehaviour
 
 
 
+### 练习：在层级未知情况下查找子物体
 
+```c#
+// TransformHelper.cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TransformHelper : MonoBehaviour
+{
+    // 在层级未知情况下查找子物体
+    // 传入：父物体变换组件，子物体名称
+    // 返回：
+    public static Transform GetChild(Transform parentTF, string childName){
+        // 在子物体中查找
+        Transform childTF = parentTF.Find(childName);
+        if(childTF != null) return childTF;
+
+        // 将问题交由子物体
+        int count = parentTF.childCount;
+        // 遍历所有子物体，在子物体的子物体中查找
+        for (int i = 0; i < count; i++){
+            childTF = GetChild(parentTF.GetChild(i), childName);
+            if(childTF != null) return childTF;
+        }
+        // 找不到
+        return null;
+    }
+
+}
+```
+
+```c#
+// TransformHelperTest.cs
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class TransformHelperTest : MonoBehaviour
+{
+    private void OnGUI(){
+        if(GUILayout.Button("层级未知，查找子物体")){
+            Transform childTF = TransformHelper.GetChild(this.transform, "TFHelper (5)");
+            if(childTF != null){
+                childTF.GetComponent<MeshRenderer>().material.color = Color.red;
+            }
+            else print("没有这个子物体。");
+        }
+    }
+}
+```
 
