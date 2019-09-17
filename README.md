@@ -520,8 +520,8 @@ Static Functions 静态函数：
 
 - Destroy：删除一个游戏对象、组件或资源（参数是 Object，可以删除任何东西），可以设置时间（几秒后删除），比如敌人死后几秒销毁
 - DontDestroyOnLoad：加载新场景的时候使目标对象不被销毁，一般重新 Load 场景会把所有对象销毁再重新创建一遍。
-- FindObjectOfType：根据类型找对象
-- FindObjectsOfType：根据类型找对象
+- FindObjectOfType：根据类型（脚本类）找对象引用，例如 Enemy 类的脚本在不同 GameObject 实例化的 Enemy 对象的引用
+- FindObjectsOfType：根据类型（脚本类）找对象引用
 - Instantiate：克隆原始物体并返回克隆物体（传入 GameObject、Transform等）
 
 ```c#
@@ -571,6 +571,55 @@ public class GameObjectDemo : MonoBehaviour
     }
     // 练习：查找血量最低的敌人
     // 提示：查找 Enemy 脚本
+}
+```
+
+
+
+### 练习：查找血量最低的敌人
+
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Enemy : MonoBehaviour
+{
+   public float HP;
+}
+```
+
+```c#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class FindEnemy : MonoBehaviour
+{
+
+    private void OnGUI(){
+
+        if(GUILayout.Button("查找血量最低的敌人")){
+            // 查找场景中所有 Enemy 类型的引用
+            Enemy[] allEnemy = Object.FindObjectsOfType<Enemy>();
+            // 获取血量最低的对象引用
+            Enemy min = FindEnemyByMinHP(allEnemy);
+            // 根据 Enemy 类型引用获取其他组件类型引用
+            min.GetComponent<MeshRenderer>().material.color = Color.red;
+        }
+    }
+
+    public Enemy FindEnemyByMinHP(Enemy[] allEnemy){
+        // 假设第一个就是血量最低的敌人
+        Enemy min = allEnemy[0];
+        // 一次与后面比较
+        for (int i = 1; i < allEnemy.Length; ++i){
+            if(min.HP > allEnemy[i].HP){
+                min = allEnemy[i];
+            }
+        }
+        return min;
+    }
 }
 ```
 
