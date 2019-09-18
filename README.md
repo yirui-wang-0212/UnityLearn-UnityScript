@@ -576,7 +576,7 @@ public class GameObjectDemo : MonoBehaviour
 
 
 
-### 练习：查找血量最低的敌人
+### 练习1：查找血量最低的敌人
 
 ```c#
 // Enemy.cs
@@ -627,7 +627,7 @@ public class FindEnemy : MonoBehaviour
 
 
 
-### 练习：在层级未知情况下查找子物体
+### 练习2：在层级未知情况下查找子物体
 
 ```c#
 // TransformHelper.cs
@@ -771,3 +771,10 @@ public class TimeDemo : MonoBehaviour
 }
 ```
 
+
+
+### 练习：倒计时
+
+使用 Text 制作倒计时预制件
+
+从 02:00 开始，最后 10s 字体为红色，时间为 00:00 后停止计时。
