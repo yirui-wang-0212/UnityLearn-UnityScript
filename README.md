@@ -895,3 +895,20 @@ public class CountdownTimer : MonoBehaviour
 }
 ```
 
+#### 预制件
+
+一种资源类型，可以多次在场景进行实例。
+
+本质是一个配置文件。
+
+可以使用预制件通过代码创建 GameObject。
+
+优点：对预制件的更改，可以同步到所有实例，从而提高开发效率。
+
+通过预制件创建的 GameObject：
+
+- 当修改其属性后点击 Prefab - Apply，则将修改的属性同步到预制件，使得其他由该预制件创建的 GameObject 也得到相应属性的修改。
+- 当修改其属性后不点击 Prefab - Apply，则该属性和属性值在 Inspector 里面显示为粗体，当预制件该属性有所更改时，此 GameObject 的该属性不受影响（即允许实例有自己的属性值，如果单独修改实例的属性值，则该值不再随预制件变化）。
+- Prefab - Select 键：通过预制件实例选择对应预制件
+- Prefab - Revert 键：放弃实例属性值，还原预制件属性值
+- Prefab - Apply 键：将某一实例的修改应用到所有实例
