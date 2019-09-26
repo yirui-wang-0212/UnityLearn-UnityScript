@@ -912,3 +912,67 @@ public class CountdownTimer : MonoBehaviour
 - Prefab - Select 键：通过预制件实例选择对应预制件
 - Prefab - Revert 键：放弃实例属性值，还原预制件属性值
 - Prefab - Apply 键：将某一实例的修改应用到所有实例
+
+
+
+## Animation
+
+#### 开门动画
+
+#####  创建 Animation Clip
+
+通过动画视图可以直接创建和修改动画片段（Animation Clips）
+
+1. 显示动画（Animation）视图：Window - Animation
+2. 为物体添加 Animation 组件
+3. 在动画（Animation）视图中点击 Create 创建片段命名为 Door，保存在 Animations 文件夹中
+4. Animation 视图中 左侧 AddProperty - Transform - Rotation
+
+**时间线**：
+
+![3](Pictures/3.png)
+
+- 可以单击时间线上的任何位置预览或修改动画片段
+- 数字显示为秒数和帧数。例如：1:30 表示 1 秒和 30 帧
+
+5. 拖动结束关键帧到 0:30，表示开门动画为 0.5s
+6. 选中结束关键帧，修改 Rotation
+7. 点击播放按钮，可以看到自动创建了补间动画
+8. 可以在开始和结束之间添加关键帧
+9. 将动画片段 Door 拖到物体 Inspector - Animation - Animation
+10. 给门添加 Collider Component（用于触发 OnMouseDown 事件）
+11. 将 Animation - Play Automatically 设为 false，表示只由 Script 控制
+
+#### Animation 类
+
+Variables 变量：
+
+- isPlaying
+  - bool isPlay = animation.isPlaying;
+  - bool isPlay = animation.isPlaying("动画名");
+
+Functions 函数：
+
+- Play
+  - animation.Play("动画名");
+- CrossFade
+  - animation.PlayQueue("动画名");
+  - 淡入淡出，人物跑步动画和静止动画的平滑过渡 
+- PlayQueued
+  - animation.PlayQueue("动画名");
+  - 在前一个动画播放完成之后直接播放下一个动画。如果使用 Play 和  CrossFade 未播完 A 之后会马上播放 B
+- animation["动画名"].speed = 1;
+  - 播放速度
+  - 1：正常
+  - 2：2倍速
+  - 0：不播放
+  - -1：倒着播放
+- animation["动画名"].wrapmode = WrapMode.PingPong;
+- animation["动画名"].length;
+  - 动画总长度
+- animation["动画名"].time;
+  - 当前播放时间
+
+```c#
+
+```
