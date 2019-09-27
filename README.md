@@ -361,11 +361,22 @@ Variables 变量：
   *练习：使用 Find 和 GetChild 可以实现在层级未知情况下查找子物体：递归*
 
 - DetachChild：所有子对象解除父子关系
+
 - SetParent(None)：于父物体解除父子关系
+
 - GetSiblingIndex：获取该对象的同级索引
+
 - SetSiblingIndex：设置该对象的同级索引
+
 - SetAsFirstSibling：设置该对象的同级索引为0
+
 - SetAsLastSibling：设置该对象的同级索引为最末
+
+考虑到**性能**，
+
+this.transform 尽量不要在 Update 中使用，更好的方法是在 Start 中获取引用后存入到一个 private 变量中，再在 Update 中调用，避免每次  this.transform 都进行查找。（在 c# 中，基本数据类型是值传递，class 是引用传递。
+
+同理， this.GetComponent<组件名>() 也应尽量在 Update 里面少用，更好的方法是在 Start 中获取引用后存入到一个 private 变量中，再在 Update 中调用。
 
 ```c#
 // TransformDemo.cs
@@ -576,7 +587,7 @@ public class GameObjectDemo : MonoBehaviour
 
 
 
-#### 练习1：查找血量最低的敌人
+#### 练习1：查找血量最低和距离最近的敌人
 
 ```c#
 // Enemy.cs
@@ -655,7 +666,6 @@ public class TransformHelper : MonoBehaviour
         // 找不到
         return null;
     }
-
 }
 ```
 
