@@ -706,9 +706,6 @@ public class TimeDemo : MonoBehaviour
     public float seeUnscaledTime;
     public float seeRealtimeSinceStartup;
 
-    
-
-
     // 渲染场景时执行，不受 TimeScale 影响
     // 但是如果使用 Time.deltaTime，Time.deltaTime 受 TimeScale 影响
     public void Update(){
@@ -760,7 +757,7 @@ public class TimeDemo : MonoBehaviour
 
             // 时间的缩放，可以用于减慢运动效果
             // 默认为 1.0，和实时时间一样快，0 为暂停游戏（FixedUpdate 不再执行，Update 不受影响）
-            // FixedUpdate 不受影响，Update 不受影响
+            // FixedUpdate 受影响，Update 不受影响
             Time.timeScale = 0;
         }
 
@@ -950,7 +947,7 @@ public class CountdownTimer : MonoBehaviour
 6. 选中结束关键帧，修改 Rotation
 7. 点击播放按钮，可以看到自动创建了补间动画
 8. 可以在开始和结束之间添加关键帧
-9. 将动画片段 Door 拖到物体 Inspector - Animation - Animation
+9. 将 Project 中的动画片段 Door 拖到物体 Inspector - Animation - Animation
 10. 给门添加 Collider Component（用于触发 OnMouseDown 事件）
 11. 将 Animation - Play Automatically 设为 false，表示只由 Script 控制
 
