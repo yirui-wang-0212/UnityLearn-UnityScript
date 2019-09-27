@@ -919,13 +919,24 @@ public class CountdownTimer : MonoBehaviour
 
 #### 开门动画
 
-#####  创建 Animation Clip
+#### 创建 Animation Clip
 
 通过动画视图可以直接创建和修改动画片段（Animation Clips）
 
 1. 显示动画（Animation）视图：Window - Animation
+
 2. 为物体添加 Animation 组件
-3. 在动画（Animation）视图中点击 Create 创建片段命名为 Door，保存在 Animations 文件夹中
+
+3. 在动画（Animation）视图中点击 Create 创建片段命名为 Door.anim，保存在 Animations 文件夹中
+
+   **Animation Clip - Inspector - Wrap Mode：**
+
+   - Default
+   - Once：播放一次
+   - Loop：循环播放
+   - Ping Pong：头 -> 尾 -> 头 -> 尾 -> ...
+   - Clamp Forever：只播放一次，播放完成后固定在最后，再也不能再播了。
+
 4. Animation 视图中 左侧 AddProperty - Transform - Rotation
 
 **时间线**：
