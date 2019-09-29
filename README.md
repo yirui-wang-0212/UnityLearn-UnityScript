@@ -1113,8 +1113,6 @@ public class Door : MonoBehaviour{
 
 ​		- Static Parameters：和 Button 一样，在相应的框框中输入。
 
-​		
-
 ![6](Pictures/6.png)
 
 ![7](Pictures/7.png)
@@ -1126,4 +1124,3 @@ public class Door : MonoBehaviour{
 - 实现接口
 
 - 自定义框架
-
