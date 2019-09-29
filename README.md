@@ -1074,4 +1074,56 @@ public class Door : MonoBehaviour{
 
 
 
-## 
+## UGUI：Event 事件
+
+注意 EventSystem 是否可用，Scene 中 EventSystem 是共用的。
+
+### 事件注册
+
+共 4 种方法：
+
+- 通过编辑器方法
+
+  **Button**
+
+  1. 将脚本（EventDemo）挂到 GameObject 上（例如 Canvas 上）
+  2. 在 Button GameObject 的 Inspector 中：Button(Script) - On Click，点击 +，将挂有脚本的 GameObject（例如 Canvas）拖入相应框框里，选择脚本组件（EventDemo）中要调用的方法（Fun1）
+
+![4](Pictures/4.png)
+
+
+
+​		可以为函数传入一个参数：在 Button(Script) - On Click 相应框框中输入参数即可，如下图：
+
+​		当参数为数组时不可以。
+
+![5](Pictures/5.png)
+
+​		**InputField**
+
+​		两种事件：
+
+​		- On Value Changed (String)：当值改变时触发。
+
+​		- On End Edit (String)：当输入完成时触发：按下回车键或点击除此 InputField 外的其他地方。
+
+​		参数可以选择：
+
+​		- Dynamic string：传入的值即是在 InputField 中输入的值，是动态的，不能自己输入。
+
+​		- Static Parameters：和 Button 一样，在相应的框框中输入。
+
+​		
+
+![6](Pictures/6.png)
+
+![7](Pictures/7.png)
+
+​		**其他 Canvas 元素**
+
+- AddListener
+
+- 实现接口
+
+- 自定义框架
+
