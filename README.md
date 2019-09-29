@@ -2,7 +2,7 @@
 
 
 
-### 语法结构
+## 语法结构
 
 - 命名空间与类名必须一致
 - 写好的脚本必须附加到物体上才能执行
@@ -10,19 +10,19 @@
 
 
 
-### 编译过程
+## 编译过程
 
 **源代码** --（CLS）-- > **中间语言** --（Mono Runtime）--> **机器码**
 
 
 
-### 脚本编译工具
+## 脚本编译工具
 
 Unity 编辑器中，Edit ->Preferences，在弹出的对话框中单击左侧 Extenal Tool 命令，然后在 External Script Editor 下拉列表中选择 VS Code 作为 Unity 默认的编辑器
 
 
 
-### 类？对象？
+## 类？对象？
 
 - Scripts（一个类） 挂到 GameObject 上时会创建一个对象。
 - GameObject 上的一个 Component 是一个对像：如 Transform、Camera、Audio Listener 都是对应类（Transform 类、Camera 类、Audio Listener 类）的对象
@@ -31,7 +31,7 @@ Unity 编辑器中，Edit ->Preferences，在弹出的对话框中单击左侧 E
 
 
 
-### 代码
+## 代码
 
 - 默认不写就是 private
 - Update 如果不删除，即使里面不写内容，也会每帧被调用（内存中会给它开辟一个栈帧）
@@ -96,7 +96,7 @@ public class Lifecycle : MonoBehaviour{
 
 
 
-### 脚本生命周期（必然事件、消息Message）
+## 脚本生命周期（必然事件、消息Message）
 
 文档：MonoBehaviour 下的消息
 
@@ -230,7 +230,7 @@ public class Lifecycle : MonoBehaviour{
 
 
 
-### Debug
+## Debug
 
 - 控制台调试
 
@@ -258,13 +258,13 @@ public class Lifecycle : MonoBehaviour{
 
  
 
-### 常用 API
+## 常用 API
 
 ![2](Pictures/2.png)
 
 
 
-#### Component
+### Component
 
 Component 类提供了查找（在当前 GameObject、后代、先辈）组件的功能。
 
@@ -342,7 +342,7 @@ public class ComponentDemo : MonoBehaviour{
 
 
 
-#### Transform
+### Transform
 
 继承自 Component。
 
@@ -486,7 +486,7 @@ public class TransformDemo : MonoBehaviour{
 
 
 
-#### GameObject
+### GameObject
 
 Hierachy 面板里所有东西都是 GameObject。
 
@@ -521,7 +521,7 @@ Static Functions 静态函数：
 - GetComponentsInChildren
 - GetComponentsInParent
 
-#### Object
+### Object
 
 Variables 变量：
 
@@ -587,7 +587,7 @@ public class GameObjectDemo : MonoBehaviour
 
 
 
-#### 练习1：查找血量最低和距离最近的敌人
+### 练习1：查找血量最低和距离最近的敌人
 
 ```c#
 // Enemy.cs
@@ -666,7 +666,7 @@ public class FindEnemy : MonoBehaviour
 
 
 
-#### 练习2：在层级未知情况下查找子物体
+### 练习2：在层级未知情况下查找子物体
 
 ```c#
 // TransformHelper.cs
@@ -719,7 +719,7 @@ public class TransformHelperTest : MonoBehaviour
 
 
 
-#### Time
+## Time
 
 全都是 Static Properties 静态属性
 
@@ -810,7 +810,7 @@ public class TimeDemo : MonoBehaviour
 
 ### 隔一段时间执行代码 / 重复执行的代码
 
-#### 练习：倒计时
+### 练习：倒计时
 
 使用 Text 制作倒计时预制件
 
@@ -952,7 +952,7 @@ public class CountdownTimer : MonoBehaviour
 
 ## Animation
 
-#### 开门动画
+### 开门动画
 
 #### 创建 Animation Clip
 
@@ -989,7 +989,7 @@ public class CountdownTimer : MonoBehaviour
 10. 给门添加 Collider Component（用于触发 OnMouseDown 事件）
 11. 将 Animation - Play Automatically 设为 false，表示只由 Script 控制
 
-#### Animation 类
+### Animation 类
 
 Variables 变量：
 
@@ -1071,3 +1071,7 @@ public class Door : MonoBehaviour{
     }
 }
 ```
+
+
+
+## 
