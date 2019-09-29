@@ -1082,7 +1082,19 @@ public class Door : MonoBehaviour{
 
 共 4 种方法：
 
-- 通过编辑器方法
+- **通过编辑器方法**
+
+  优点：方便、所见即所得
+
+  缺点：在代码中看不到是谁调用了这个方法，工作中（尤其团队开发）用得最少
+
+  ```c#
+  // 1. 通过编辑器方法
+  public void Fun1(string input){
+  
+    	print("Fun1: " + input);
+  }
+  ```
 
   **Button**
 
@@ -1119,8 +1131,37 @@ public class Door : MonoBehaviour{
 
 ​		**其他 Canvas 元素**
 
-- AddListener
+- **AddListener**
 
-- 实现接口
+  优点：在代码中能看到是谁调用了这个方法
 
-- 自定义框架
+  ```c#
+  //2. AddListener
+  public void Fun2(){
+  
+    	print("Fun2");
+  }
+  
+  public void Fun3(string str){
+  
+    	print("Fun3: " + str);
+  }
+  
+  private void Start(){
+  
+      Button btn = this.transform.Find("AddListener/Button").GetComponent<Button>();
+      // public delegate void UnityAction();
+      // 需要传入一个 无返回值、无参数列表的方法
+      btn.onClick.AddListener(Fun2);
+  
+      InputField input = this.transform.Find("AddListener/InputField").GetComponent<InputField>();
+      // public delegatevoid UnityAction<T0>(T0 arg0);
+      // 需要传入一个 无返回值，1个参数，参数类型为泛型，在这里是 string 的方法
+      // input.onValueChange.AddListener(Fun3);
+      input.onEndEdit.AddListener(Fun3);
+  }
+  ```
+
+- **实现接口**
+
+- **自定义框架**
