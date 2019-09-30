@@ -1082,7 +1082,7 @@ public class Door : MonoBehaviour{
 
 共 4 种方法：
 
-- **通过编辑器方法**
+- **方法1：通过编辑器方法**
 
   优点：方便、所见即所得
 
@@ -1131,7 +1131,7 @@ public class Door : MonoBehaviour{
 
 ​		**其他 Canvas 元素**
 
-- **AddListener**
+- **方法2：AddListener**
 
   优点：在代码中能看到是谁调用了这个方法
 
@@ -1162,6 +1162,37 @@ public class Door : MonoBehaviour{
   }
   ```
 
-- **实现接口**
+- **方法3：实现接口**
+
+  所有的 UI、GameObject 都可以使用
+
+  依赖于：
+
+  EventSystem 上的 Event System (Script) ：负责分发。
+
+  和 Stamdalone Input Module  (Script) ：负责检测鼠标键盘（输入模块）。移动端应将其用 Touch Input Module (Script) 替换。
+
+  以及 Canvas 上的 Graphic Raycaster (Script)：负责检测 Image 和 Text，Image 和 Text 接受事件。对于 Button 等 UI 元素来说也是 Button 上的 Image 和 Text 检测的，若将 Button 上的 Image (Script) Component 中的 Ray Target 和 Button 子 UI 元素 Text 上的 Text (Script) Component 中的 Ray Target 都禁用，Button 无法检测到被按下，事件也不会被触发。
+
+  - **鼠标指针类**（PC、移动端）
+    - IPointerEnterHandler：移入
+    - IPointerExitHandler：移出
+    - IPointerDownHandler：按下
+    - IPointerUpHandler：抬起
+    - PointerClickHandler：按下后抬起
+  - **拖拽类**
+    - IBeginDragHandler：开始拽
+    - IDragHandler：正在拽
+    - IEndDragHandler：结束拽
+    - IDropHandler：释放
+  - **点选类**（InputField 有，Button 没有）
+    - IUpdateSelectedHandler：点了选中后每帧执行
+    - ISelectHandler：点了选中后那一帧执行
+    - IDeselectHandler：不选了那一帧
+  - **输入类**（建立在选中的基础上）
+    - IScrollHandler：选中 UI 后，滑动鼠标滚轮
+    - IMoveHandler：选中 UI 后，移动（按键盘上的上下左右、wasd）
+    - ISubmitHandler：选中 UI 后，按回车键
+    - ICancelHandler：选中 UI 后，按 Esc 键
 
 - **自定义框架**
